@@ -55,4 +55,12 @@ public class App {
         System.out.println("Students waiting on chairs: " + waiting);
         System.out.println("Students that will come later: " + later);
     }
+
+    public static Semaphore getChairs() {
+        return Chairs;
+    }
+
+    public static Semaphore getTAs() {
+        return TAs;
+    }
 }
