@@ -19,21 +19,24 @@ public class Student extends Thread {
             if (App.getChairs().tryAcquire()) {
                 try {
                     App.getTAs().acquire();
-                    App.getChairs().release();
-                    Thread.sleep(ThreadLocalRandom.current().nextInt(5, 8) * 1000);
-                    App.getTAs().release();
-                    return;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                App.getChairs().release();
+                randomWait(5, 8); // Stay with a TA for a while (make it realistic)
+                App.getTAs().release();
+                return;
             } else {
-                // Try again after random period of time
-                try {
-                    Thread.sleep(ThreadLocalRandom.current().nextInt(3, 8) * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                randomWait(3, 8); // Try again after random period of time
             }
+        }
+    }
+
+    private void randomWait(int min, int max) {
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(min, max + 1) * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
