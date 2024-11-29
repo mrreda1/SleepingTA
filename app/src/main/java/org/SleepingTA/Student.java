@@ -8,9 +8,20 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Student extends Thread {
     @SuppressWarnings("unused")
     private int id;
+    private int taWaitInterval;
+
+    public Student(int id, int waitInterval) {
+        this.id = id;
+
+        if (waitInterval < 0)
+            throw new IllegalArgumentException("Wait interval must be a positive integer.");
+
+        this.taWaitInterval = waitInterval;
+    }
 
     public Student(int id) {
         this.id = id;
+        this.taWaitInterval = 0;
     }
 
     @Override
@@ -22,13 +33,20 @@ public class Student extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 Services.getChairs().release();
-                // randomWait(5, 8); // Stay with a TA for a while (make it realistic)
-                wait(3);
+
+                // Stay with a TA for a while (make it realistic)
+                if (taWaitInterval > 0)
+                    wait(taWaitInterval);
+                else
+                    randomWait(1, 3);
+
                 Services.getTAs().release();
+
                 return;
             } else {
-                randomWait(3, 8); // Try again after random period of time
+                randomWait(1, 3); // Try again after random period of time
             }
         }
     }
@@ -41,9 +59,11 @@ public class Student extends Thread {
         }
     }
 
-    private void randomWait(int min, int max) {
+    private void randomWait(int minSeconds, int maxSeconds) {
         try {
-            Thread.sleep(ThreadLocalRandom.current().nextInt(min, max + 1) * 1000);
+            Services.atomicInt.incrementAndGet();
+            Thread.sleep(ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1) * 1000);
+            Services.atomicInt.decrementAndGet();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

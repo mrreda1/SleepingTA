@@ -1,6 +1,5 @@
 package org.SleepingTA.GUI;
 
-import org.SleepingTA.App;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;

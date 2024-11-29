@@ -8,22 +8,24 @@ public class App {
         guiThread.setDaemon(true);
         guiThread.start();
 
-        Services.takeUserInput();
-        Services.createStudentThreads();
-
-        while (true) {
-            var info = Services.getInfo(true);
-
-            for (var entry : info.entrySet()) {
-                // System.out.println(entry.getKey() + ": " + entry.getValue());
-            }
-
-            // Set menu's update time interval to one second.
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            guiThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        // Services.takeUserInput();
+        // Services.createStudentThreads(0);
+
+        // while (true) {
+        // Services.getInfo(true);
+
+        // // Set menu's update time interval to one second.
+        // try {
+        // Thread.sleep(1000);
+        // } catch (InterruptedException e) {
+        // e.printStackTrace();
+        // }
+        // }
     }
 }
