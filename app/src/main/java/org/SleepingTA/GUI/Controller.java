@@ -3,6 +3,7 @@ package org.SleepingTA.GUI;
 import org.SleepingTA.Services;
 import org.SleepingTA.GUI.Controllers.*;
 import org.SleepingTA.Utils.Misc;
+import org.SleepingTA.Student;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -198,6 +199,15 @@ public class Controller implements Initializable {
     void onStopBtn(ActionEvent event) {
         this.onResetBtn(event);
         this.timeline.stop();
+
+        for (Thread thread : Thread.getAllStackTraces().keySet()) {
+            if (thread.getName().startsWith("Student-")) {
+                System.out.println("Stopping thread: " + thread.getName());
+                if (thread instanceof Student) {
+                    ((Student) thread).terminate();
+                }
+            }
+        }
     }
 
     @FXML

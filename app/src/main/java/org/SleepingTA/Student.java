@@ -9,10 +9,11 @@ public class Student extends Thread {
     @SuppressWarnings("unused")
     private int id;
     private int taWaitInterval;
+    private volatile boolean running = true;
 
     public Student(int id, int waitInterval) {
+        super("Student-" + id);
         this.id = id;
-
         if (waitInterval < 0)
             throw new IllegalArgumentException("Wait interval must be a positive integer.");
 
@@ -20,13 +21,14 @@ public class Student extends Thread {
     }
 
     public Student(int id) {
+        super("Student-" + id);
         this.id = id;
         this.taWaitInterval = 0;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (running) {
             if (Services.getChairs().tryAcquire()) {
                 try {
                     Services.getTAs().acquire();
@@ -49,6 +51,10 @@ public class Student extends Thread {
                 randomWait(1, 3); // Try again after random period of time
             }
         }
+    }
+
+    public void terminate() {
+        running = false;
     }
 
     private void wait(int seconds) {
