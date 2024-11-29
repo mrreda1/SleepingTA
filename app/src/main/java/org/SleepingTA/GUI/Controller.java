@@ -5,6 +5,7 @@ import org.SleepingTA.GUI.Controllers.*;
 import org.SleepingTA.Utils.Misc;
 import org.SleepingTA.Student;
 import java.net.URL;
+import javafx.util.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -21,9 +22,6 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
 
 public class Controller implements Initializable {
 
@@ -87,12 +85,15 @@ public class Controller implements Initializable {
     @FXML
     private Label taWorkingCount;
 
-    private Map<String, Integer> initialData = new HashMap<String, Integer>();
-
+    // Timeline for updating the UI
     private Timeline timeline;
+
+    // Initial data to be used for to simulate the busy/free components
+    private Map<String, Integer> initialData = new HashMap<String, Integer>();
 
     public void initialize(URL location, ResourceBundle resources) {
         taTimeRandomizeYes.setSelected(true);
+
         // The number of seconds input, next to the radio buttons.
         numberOfTaWaitTime.setVisible(false);
         numberOfTaWaitTimeMsg.setVisible(false);
@@ -101,15 +102,15 @@ public class Controller implements Initializable {
     @SuppressWarnings("unused")
     @FXML
     void onStartBtn(ActionEvent event) {
-        boolean validation = true;
         String numberOfStudentsInput = numberOfStudents.getText();
         String numberOfChairsInput = numberOfChairs.getText();
         String numberOfTaInput = numberOfTAs.getText();
         String numberOfTaWaitTimeInput = numberOfTaWaitTime.getText();
         Toggle taTimeRandomizeInput = taTimeRandomize.getSelectedToggle();
 
-        Integer student = 0, ta = 0, chairs = 0, taWaitTime;
+        Integer student = 0, ta = 0, chairs = 0, taWaitTime = 0;
         boolean randomize = true;
+        boolean validation = true;
 
         if (!Misc.isInteger(numberOfStudentsInput)) {
             numberOfStudentsVal.setVisible(true);
@@ -178,9 +179,6 @@ public class Controller implements Initializable {
 
         FlowPaneControllers.initializeGarden(garden, data.get("laterStudents"));
         FlowPaneControllers.initializeHallway(hallway, initialData.get("chairs"), data.get("waitingStudents"));
-
-        System.out.println(data.get("workingTA"));
-        System.out.println(initialData.get("tas"));
         GridPaneController.initializeTaRoom(tasRoom, initialData.get("tas"), data.get("workingTA"));
     }
 
@@ -197,30 +195,33 @@ public class Controller implements Initializable {
 
     @FXML
     void onStopBtn(ActionEvent event) {
-        this.onResetBtn(event);
         this.timeline.stop();
 
         for (Thread thread : Thread.getAllStackTraces().keySet()) {
             if (thread.getName().startsWith("Student-")) {
-                System.out.println("Stopping thread: " + thread.getName());
                 if (thread instanceof Student) {
                     ((Student) thread).terminate();
                 }
             }
         }
+
+        FlowPaneControllers.clearFlowPane(hallway);
+        FlowPaneControllers.clearFlowPane(garden);
+        GridPaneController.clearTaRoom(tasRoom);
     }
 
     @FXML
     void onResetBtn(ActionEvent event) {
-        FlowPaneControllers.clearFlowPane(hallway);
-        FlowPaneControllers.clearFlowPane(garden);
-        GridPaneController.clearTaRoom(tasRoom);
-
         numberOfStudentsVal.setVisible(false);
         numberOfChairsVal.setVisible(false);
         numberOfTAsVal.setVisible(false);
         numberOfTaWaitTimeVal.setVisible(false);
         taTimeRandomizeVal.setVisible(false);
+
+        numberOfStudents.clear();
+        numberOfChairs.clear();
+        numberOfTAs.clear();
+        numberOfTaWaitTime.clear();
     }
 
     @FXML

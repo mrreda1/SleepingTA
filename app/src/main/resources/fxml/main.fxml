@@ -201,7 +201,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <GridPane fx:id="tasRoom" layoutX="14.0" layoutY="74.0" prefHeight="300.0" prefWidth="420.0" style="-fx-border-color: black; -fx-border-width: 2;">
+            <GridPane fx:id="tasRoom" layoutX="14.0" layoutY="74.0" prefHeight="300.0" prefWidth="420.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-border-insets: -2;">
 
             </GridPane>
             <Label layoutX="21.0" layoutY="29.0" text="TAs' Room">
@@ -219,7 +219,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <FlowPane fx:id="hallway" layoutX="500.0" layoutY="274.0" prefHeight="100.0" prefWidth="500.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-insets: -2;" />
+            <FlowPane fx:id="hallway" layoutX="500.0" layoutY="274.0" prefHeight="100.0" prefWidth="500.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-insets: -2; -fx-border-radius: 10;" />
 
          </children>
       </AnchorPane>

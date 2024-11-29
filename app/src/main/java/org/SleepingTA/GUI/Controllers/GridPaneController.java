@@ -2,9 +2,7 @@ package org.SleepingTA.GUI.Controllers;
 
 import java.util.Map;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -26,8 +24,7 @@ public class GridPaneController {
         double taRoomWidth = 420;
         double taRoomHeight = 300;
 
-        double originalImageWidth = 190;
-        double originalImageHeight = 190;
+        double originalImageWidthHeight = 190;
 
         Integer columns = c(numberOfTAs);
         Integer rows = (int) Math.ceil((double) numberOfTAs / columns);
@@ -46,10 +43,8 @@ public class GridPaneController {
             Integer col = i % columns;
 
             imageView.setPreserveRatio(true);
-            imageView.setFitWidth(originalImageWidth / (rows));
-            imageView.setFitHeight(originalImageWidth / (rows));
-            taRoom.setHalignment(imageView, HPos.CENTER);
-            taRoom.setValignment(imageView, VPos.CENTER);
+            imageView.setFitWidth(originalImageWidthHeight / (rows));
+            imageView.setFitHeight(originalImageWidthHeight / (rows));
 
             taRoom.add(imageView, col, row);
         }
