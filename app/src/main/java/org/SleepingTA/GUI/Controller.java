@@ -118,7 +118,6 @@ public class Controller implements Initializable {
         }
     }
 
-    @SuppressWarnings("unused")
     @FXML
     void onStartBtn(ActionEvent event) {
         String numberOfStudentsInput = numberOfStudents.getText();
@@ -219,7 +218,8 @@ public class Controller implements Initializable {
 
     @FXML
     void onStopBtn(ActionEvent event) {
-        this.timeline.stop();
+        if (this.timeline != null)
+            this.timeline.stop();
 
         for (Thread thread : Thread.getAllStackTraces().keySet())
             if (thread.getName().startsWith("Student-") && thread instanceof Student)

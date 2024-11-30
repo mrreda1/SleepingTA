@@ -1,0 +1,57 @@
+.button {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-width: 2;
+    -fx-border-color: #3b3b3b;
+}
+
+#startBtn {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-color: #2e7d32;
+}
+#startBtn:hover {
+    -fx-background-color: #45a049;
+}
+#startBtn:pressed {
+    -fx-background-color: #2e7d32;
+}
+
+#stopBtn {
+    -fx-background-color: #F44336;
+    -fx-text-fill: white;
+    -fx-border-color: #c62828;
+}
+#stopBtn:hover {
+    -fx-background-color: #e53935;
+}
+#stopBtn:pressed {
+    -fx-background-color: #c62828;
+}
+
+#resetBtn {
+    -fx-background-color: #FFC107; /* Amber */
+    -fx-text-fill: black;
+    -fx-border-color: #ffa000;
+}
+#resetBtn:hover {
+    -fx-background-color: #ffb300; /* Slightly darker amber on hover */
+}
+#resetBtn:pressed {
+    -fx-background-color: #ffa000; /* Dark amber when pressed */
+}
+
+#exitBtn {
+    -fx-background-color: #9E9E9E; /* Grey */
+    -fx-text-fill: white;
+    -fx-border-color: #616161;
+}
+#exitBtn:hover {
+    -fx-background-color: #757575; /* Slightly darker grey on hover */
+}
+#exitBtn:pressed {
+    -fx-background-color: #616161; /* Dark grey when pressed */
+}
