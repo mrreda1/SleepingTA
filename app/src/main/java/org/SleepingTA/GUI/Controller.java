@@ -177,7 +177,7 @@ public class Controller implements Initializable {
             return;
 
         Services.takeUserInput(student, chairs, ta);
-        Services.createStudentThreads(0);
+        Services.createStudentThreads(taWaitTime);
 
         initialData.put("students", student);
         initialData.put("chairs", chairs);
@@ -221,13 +221,9 @@ public class Controller implements Initializable {
     void onStopBtn(ActionEvent event) {
         this.timeline.stop();
 
-        for (Thread thread : Thread.getAllStackTraces().keySet()) {
-            if (thread.getName().startsWith("Student-")) {
-                if (thread instanceof Student) {
-                    ((Student) thread).terminate();
-                }
-            }
-        }
+        for (Thread thread : Thread.getAllStackTraces().keySet())
+            if (thread.getName().startsWith("Student-") && thread instanceof Student)
+                ((Student) thread).terminate();
 
         FlowPaneControllers.clearFlowPane(hallway);
         FlowPaneControllers.clearFlowPane(garden);
