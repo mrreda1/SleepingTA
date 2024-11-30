@@ -20,6 +20,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
@@ -85,6 +86,14 @@ public class Controller implements Initializable {
     @FXML
     private Label taWorkingCount;
 
+    // Tooltips
+    @FXML
+    private Tooltip gardenTooltip;
+    @FXML
+    private Tooltip hallwayTooltip;
+    @FXML
+    private Tooltip taRoomTooltip;
+
     // Timeline for updating the UI
     private Timeline timeline;
 
@@ -92,11 +101,21 @@ public class Controller implements Initializable {
     private Map<String, Integer> initialData = new HashMap<String, Integer>();
 
     public void initialize(URL location, ResourceBundle resources) {
+        // Set the default value for randomizing ta time option
         taTimeRandomizeYes.setSelected(true);
 
         // The number of seconds input, next to the radio buttons.
         numberOfTaWaitTime.setVisible(false);
         numberOfTaWaitTimeMsg.setVisible(false);
+
+        var Tooltips = new Tooltip[] { gardenTooltip, hallwayTooltip, taRoomTooltip };
+
+        // Set show/hide delays for the tooltips
+        for (Tooltip tooltip : Tooltips) {
+            tooltip.setShowDelay(Duration.millis(200));
+            tooltip.setHideDelay(Duration.millis(200));
+            tooltip.setShowDuration(Duration.INDEFINITE);
+        }
     }
 
     @SuppressWarnings("unused")
