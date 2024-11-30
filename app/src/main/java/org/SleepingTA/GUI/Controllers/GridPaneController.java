@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 public class GridPaneController {
     private static Map<String, String> iconPaths = org.SleepingTA.Utils.Misc.icons;
 
-    public static int c(int n) {
+    private static int c(int n) {
         if (n <= 4)
             return 2;
         else if (n == 8)
@@ -20,14 +20,14 @@ public class GridPaneController {
         return (int) Math.round((float) Math.sqrt(n)) + 1;
     }
 
-    public static void initializeTaRoom(GridPane taRoom, int numberOfTAs, int redTas) {
+    public static void initializeTaRoom(GridPane taRoom, int numberOfTAs, int takenTas) {
         double taRoomWidth = 420;
         double taRoomHeight = 300;
 
         double originalImageWidthHeight = 190;
 
-        Integer columns = c(numberOfTAs);
-        Integer rows = (int) Math.ceil((double) numberOfTAs / columns);
+        int columns = c(numberOfTAs);
+        int rows = (int) Math.ceil((double) numberOfTAs / columns);
 
         taRoom.setPrefSize(taRoomWidth, taRoomHeight);
         taRoom.setAlignment(Pos.CENTER);
@@ -35,12 +35,12 @@ public class GridPaneController {
         taRoom.setVgap(10);
 
         for (int i = 0; i < numberOfTAs; i++) {
-            String taIcon = i < redTas ? "redTa" : "greenTa";
+            String taIcon = i < takenTas ? "redTa" : "greenTa";
             Image image = new Image(iconPaths.get(taIcon));
             ImageView imageView = new ImageView(image);
 
-            Integer row = i / columns;
-            Integer col = i % columns;
+            int row = i / columns;
+            int col = i % columns;
 
             imageView.setPreserveRatio(true);
             imageView.setFitWidth(originalImageWidthHeight / (rows));
@@ -50,7 +50,7 @@ public class GridPaneController {
         }
     }
 
-    public static void clearTaRoom(GridPane taRoom) {
-        taRoom.getChildren().clear();
+    public static void clearGridPane(GridPane gridPane) {
+        gridPane.getChildren().clear();
     }
 }

@@ -180,7 +180,7 @@ public class Controller implements Initializable {
 
         FlowPaneControllers.clearFlowPane(hallway);
         FlowPaneControllers.clearFlowPane(garden);
-        GridPaneController.clearTaRoom(tasRoom);
+        GridPaneController.clearGridPane(tasRoom);
 
         FlowPaneControllers.initializeGarden(garden, data.get("laterStudents"));
         FlowPaneControllers.initializeHallway(hallway, initialData.get("chairs"), data.get("waitingStudents"));
@@ -212,7 +212,13 @@ public class Controller implements Initializable {
 
         FlowPaneControllers.clearFlowPane(hallway);
         FlowPaneControllers.clearFlowPane(garden);
-        GridPaneController.clearTaRoom(tasRoom);
+        GridPaneController.clearGridPane(tasRoom);
+
+        // Current State outputs
+        taWorkingCount.setText("0");
+        taSleepingCount.setText("0");
+        studentsWaitingCount.setText("0");
+        studentsComingLaterCount.setText("0");
     }
 
     @FXML
@@ -229,12 +235,6 @@ public class Controller implements Initializable {
         numberOfChairs.clear();
         numberOfTAs.clear();
         numberOfTaWaitTime.clear();
-
-        // Current State outputs
-        taWorkingCount.setText("");
-        taSleepingCount.setText("");
-        studentsWaitingCount.setText("");
-        studentsComingLaterCount.setText("");
     }
 
     @FXML

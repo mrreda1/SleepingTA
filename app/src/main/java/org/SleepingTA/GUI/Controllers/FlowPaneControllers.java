@@ -13,8 +13,8 @@ public class FlowPaneControllers {
     private static Map<String, String> iconPaths = org.SleepingTA.Utils.Misc.icons;
 
     public static void initializeGarden(FlowPane garden, double numberOfStudents) {
-        double gardenWidth = 500;
-        double gardenHeight = 100;
+        int gardenWidth = 500;
+        int gardenHeight = 100;
 
         garden.setPrefSize(gardenWidth, gardenHeight);
         garden.setAlignment(Pos.CENTER);
@@ -46,15 +46,15 @@ public class FlowPaneControllers {
         }
     }
 
-    public static void initializeHallway(FlowPane hallway, double numberOfChairs, double redChairs) {
-        double hallwayWidth = 500;
-        double hallwayHeight = 100;
+    public static void initializeHallway(FlowPane hallway, double numberOfChairs, int takenChairs) {
+        int hallwayWidth = 500;
+        int hallwayHeight = 100;
 
         hallway.setPrefSize(hallwayWidth, hallwayHeight);
         hallway.setAlignment(Pos.CENTER);
 
         for (int i = 0; i < numberOfChairs; i++) {
-            String chairIcon = i < redChairs ? "redChair" : "greenChair";
+            String chairIcon = i < takenChairs ? "redChair" : "greenChair";
             Image image = new Image(App.class.getResourceAsStream(iconPaths.get(chairIcon)));
             ImageView imageView = new ImageView(image);
 
