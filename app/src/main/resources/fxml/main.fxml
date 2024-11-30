@@ -115,7 +115,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="studentsWorkingCount" layoutX="597.0" layoutY="264.0" prefHeight="25.0" prefWidth="6.0" text="0">
+            <Label fx:id="studentsWaitingCount" layoutX="597.0" layoutY="264.0" prefHeight="25.0" prefWidth="6.0" text="0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

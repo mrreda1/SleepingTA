@@ -79,7 +79,7 @@ public class Controller implements Initializable {
     @FXML
     private Label studentsComingLaterCount;
     @FXML
-    private Label studentsWorkingCount;
+    private Label studentsWaitingCount;
     @FXML
     private Label taSleepingCount;
     @FXML
@@ -173,6 +173,11 @@ public class Controller implements Initializable {
     private void updateUI() {
         var data = Services.getInfo(false);
 
+        taWorkingCount.setText(data.get("workingTA").toString());
+        taSleepingCount.setText(data.get("sleepingTA").toString());
+        studentsWaitingCount.setText(data.get("waitingStudents").toString());
+        studentsComingLaterCount.setText(data.get("laterStudents").toString());
+
         FlowPaneControllers.clearFlowPane(hallway);
         FlowPaneControllers.clearFlowPane(garden);
         GridPaneController.clearTaRoom(tasRoom);
@@ -212,16 +217,24 @@ public class Controller implements Initializable {
 
     @FXML
     void onResetBtn(ActionEvent event) {
+        // Validation messages
         numberOfStudentsVal.setVisible(false);
         numberOfChairsVal.setVisible(false);
         numberOfTAsVal.setVisible(false);
         numberOfTaWaitTimeVal.setVisible(false);
         taTimeRandomizeVal.setVisible(false);
 
+        // Data Inputs
         numberOfStudents.clear();
         numberOfChairs.clear();
         numberOfTAs.clear();
         numberOfTaWaitTime.clear();
+
+        // Current State outputs
+        taWorkingCount.setText("");
+        taSleepingCount.setText("");
+        studentsWaitingCount.setText("");
+        studentsComingLaterCount.setText("");
     }
 
     @FXML
