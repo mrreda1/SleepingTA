@@ -31,8 +31,6 @@ public class Controller implements Initializable {
     @FXML
     private Button startBtn;
     @FXML
-    private Button stopBtn;
-    @FXML
     private Button exitBtn;
 
     // Timer
@@ -192,6 +190,8 @@ public class Controller implements Initializable {
 
         this.boxesTimeline.setCycleCount(Timeline.INDEFINITE);
         this.boxesTimeline.play();
+
+        startBtn.disableProperty().set(true);
     }
 
     private void updateUI() {
@@ -212,6 +212,7 @@ public class Controller implements Initializable {
 
         if (data.get("classFinished") == 1) {
             this.boxesTimeline.stop();
+            startBtn.disableProperty().set(false);
             return;
         }
     }
@@ -227,23 +228,6 @@ public class Controller implements Initializable {
         }
     }
 
-    @FXML
-    void onStopBtn(ActionEvent event) {
-        if (this.boxesTimeline != null)
-            this.boxesTimeline.stop();
-
-        Services.terminateStudentThreads();
-
-        FlowPaneControllers.clearFlowPane(hallway);
-        FlowPaneControllers.clearFlowPane(garden);
-        GridPaneController.clearGridPane(tasRoom);
-
-        // Current State outputs
-        taWorkingCount.setText("0");
-        taSleepingCount.setText("0");
-        studentsWaitingCount.setText("0");
-        studentsComingLaterCount.setText("0");
-    }
 
     @FXML
     void onResetBtn(ActionEvent event) {

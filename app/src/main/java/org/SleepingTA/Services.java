@@ -9,7 +9,7 @@ public class Services {
     private static int numChairs, numTAs, numStudents;
     private static Semaphore Chairs, TAs;
     /*
-     * An array object to keep track of all the students.
+     * - An array object to keep track of all the students.
      */
     private static ArrayList<Student> students = new ArrayList<>();
 
@@ -92,6 +92,13 @@ public class Services {
         for (Thread thread : Thread.getAllStackTraces().keySet())
             if (thread.getName().startsWith("Student-") && thread instanceof Student)
                 ((Student) thread).terminate();
+    }
+
+    public static void resetSemaphores() {
+        Chairs.drainPermits();
+        Chairs.release(numChairs);
+        TAs.drainPermits();
+        TAs.release(numTAs);
     }
 
     public static int countRunningStudents() {

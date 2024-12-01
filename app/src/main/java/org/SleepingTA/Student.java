@@ -54,7 +54,11 @@ public class Student extends Thread {
     }
 
     protected void terminate() {
-        running = false;
+        Services.getChairs().release();
+        Services.getTAs().release();
+
+        this.running = false;
+        this.setName("Terminated-" + getName());
     }
 
     protected static int countRunning() {
