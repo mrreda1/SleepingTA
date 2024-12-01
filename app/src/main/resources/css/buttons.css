@@ -33,25 +33,25 @@
 }
 
 #resetBtn {
-    -fx-background-color: #FFC107; /* Amber */
+    -fx-background-color: #FFC107;
     -fx-text-fill: black;
     -fx-border-color: #ffa000;
 }
 #resetBtn:hover {
-    -fx-background-color: #ffb300; /* Slightly darker amber on hover */
+    -fx-background-color: #ffb300;
 }
 #resetBtn:pressed {
-    -fx-background-color: #ffa000; /* Dark amber when pressed */
+    -fx-background-color: #ffa000;
 }
 
 #exitBtn {
-    -fx-background-color: #9E9E9E; /* Grey */
+    -fx-background-color: #9E9E9E;
     -fx-text-fill: white;
     -fx-border-color: #616161;
 }
 #exitBtn:hover {
-    -fx-background-color: #757575; /* Slightly darker grey on hover */
+    -fx-background-color: #757575;
 }
 #exitBtn:pressed {
-    -fx-background-color: #616161; /* Dark grey when pressed */
+    -fx-background-color: #616161;
 }

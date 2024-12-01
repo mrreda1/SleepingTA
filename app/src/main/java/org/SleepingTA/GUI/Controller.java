@@ -3,7 +3,6 @@ package org.SleepingTA.GUI;
 import org.SleepingTA.Services;
 import org.SleepingTA.GUI.Controllers.*;
 import org.SleepingTA.Utils.Misc;
-import org.SleepingTA.Student;
 import java.net.URL;
 import javafx.util.Duration;
 import java.util.HashMap;
@@ -35,6 +34,10 @@ public class Controller implements Initializable {
     private Button stopBtn;
     @FXML
     private Button exitBtn;
+
+    // Timer
+    @FXML
+    private Label timer;
 
     // Boxes
     @FXML
@@ -95,7 +98,7 @@ public class Controller implements Initializable {
     private Tooltip taRoomTooltip;
 
     // Timeline for updating the UI
-    private Timeline timeline;
+    private Timeline boxesTimeline;
 
     // Initial data to be used for to simulate the busy/free components
     private Map<String, Integer> initialData = new HashMap<String, Integer>();
@@ -120,6 +123,9 @@ public class Controller implements Initializable {
 
     @FXML
     void onStartBtn(ActionEvent event) {
+        if (this.boxesTimeline != null)
+            this.boxesTimeline.stop();
+
         String numberOfStudentsInput = numberOfStudents.getText();
         String numberOfChairsInput = numberOfChairs.getText();
         String numberOfTaInput = numberOfTAs.getText();
@@ -182,10 +188,10 @@ public class Controller implements Initializable {
         initialData.put("chairs", chairs);
         initialData.put("tas", ta);
 
-        this.timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), e -> updateUI()));
+        this.boxesTimeline = new Timeline(new KeyFrame(Duration.seconds(0.25), e -> updateUI()));
 
-        this.timeline.setCycleCount(Timeline.INDEFINITE);
-        this.timeline.play();
+        this.boxesTimeline.setCycleCount(Timeline.INDEFINITE);
+        this.boxesTimeline.play();
     }
 
     private void updateUI() {
@@ -203,6 +209,11 @@ public class Controller implements Initializable {
         FlowPaneControllers.initializeGarden(garden, data.get("laterStudents"));
         FlowPaneControllers.initializeHallway(hallway, initialData.get("chairs"), data.get("waitingStudents"));
         GridPaneController.initializeTaRoom(tasRoom, initialData.get("tas"), data.get("workingTA"));
+
+        if (data.get("classFinished") == 1) {
+            this.boxesTimeline.stop();
+            return;
+        }
     }
 
     @FXML
@@ -218,12 +229,10 @@ public class Controller implements Initializable {
 
     @FXML
     void onStopBtn(ActionEvent event) {
-        if (this.timeline != null)
-            this.timeline.stop();
+        if (this.boxesTimeline != null)
+            this.boxesTimeline.stop();
 
-        for (Thread thread : Thread.getAllStackTraces().keySet())
-            if (thread.getName().startsWith("Student-") && thread instanceof Student)
-                ((Student) thread).terminate();
+        Services.terminateStudentThreads();
 
         FlowPaneControllers.clearFlowPane(hallway);
         FlowPaneControllers.clearFlowPane(garden);

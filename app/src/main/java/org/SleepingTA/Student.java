@@ -53,8 +53,17 @@ public class Student extends Thread {
         }
     }
 
-    public void terminate() {
+    protected void terminate() {
         running = false;
+    }
+
+    protected static int countRunning() {
+        int count = 0;
+        for (Thread thread : Thread.getAllStackTraces().keySet())
+            if (thread.getName().startsWith("Student-") && thread instanceof Student)
+                count++;
+
+        return count;
     }
 
     private void wait(int seconds) {
@@ -67,9 +76,7 @@ public class Student extends Thread {
 
     private void randomWait(int minSeconds, int maxSeconds) {
         try {
-            Services.atomicInt.incrementAndGet();
             Thread.sleep(ThreadLocalRandom.current().nextInt(minSeconds, maxSeconds + 1) * 1000);
-            Services.atomicInt.decrementAndGet();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

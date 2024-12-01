@@ -1,19 +1,17 @@
 package org.SleepingTA;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Services {
     private static int numChairs, numTAs, numStudents;
     private static Semaphore Chairs, TAs;
-    /**
-     * A thread-safe integer counter that can be used for atomic operations.
-     * This counter is initialized to 0,
-     * and indicates the number of running students' threads
+    /*
+     * An array object to keep track of all the students.
      */
-    protected static AtomicInteger atomicInt = new AtomicInteger(0);
+    private static ArrayList<Student> students = new ArrayList<>();
 
     protected static void takeUserInput() {
         Scanner input = new Scanner(System.in);
@@ -58,16 +56,18 @@ public class Services {
         for (int i = 1; i <= numStudents; i++) {
             Student student = new Student(i, taWaitInterval);
             student.start();
+            students.add(student);
         }
     }
 
     public static Map<String, Integer> getInfo(boolean display) {
-        int sleepingTA, waitingStudents, workingTA, laterStudents;
+        int sleepingTA, waitingStudents, workingTA, laterStudents, classFinished;
 
         sleepingTA = TAs.availablePermits();
         waitingStudents = numChairs - Chairs.availablePermits();
         workingTA = numTAs - TAs.availablePermits();
-        laterStudents = atomicInt.get();
+        laterStudents = countRunningStudents() - waitingStudents - workingTA;
+        classFinished = !isStudentThreadRunning() ? 1 : 0;
 
         if (display)
             Services.displayInfo(sleepingTA, waitingStudents, workingTA, laterStudents);
@@ -76,7 +76,8 @@ public class Services {
                 "sleepingTA", sleepingTA,
                 "workingTA", workingTA,
                 "waitingStudents", waitingStudents,
-                "laterStudents", laterStudents);
+                "laterStudents", laterStudents,
+                "classFinished", classFinished);
     }
 
     private static void displayInfo(int sleep, int waiting, int working, int later) {
@@ -85,7 +86,23 @@ public class Services {
         System.out.println("TAs sleeping: " + sleep);
         System.out.println("Students waiting on chairs: " + waiting);
         System.out.println("Students that will come later: " + later);
-        System.out.println(Services.atomicInt.get());
+    }
+
+    public static void terminateStudentThreads() {
+        for (Thread thread : Thread.getAllStackTraces().keySet())
+            if (thread.getName().startsWith("Student-") && thread instanceof Student)
+                ((Student) thread).terminate();
+    }
+
+    public static int countRunningStudents() {
+        return Student.countRunning();
+    }
+
+    public static boolean isStudentThreadRunning() {
+        for (Student student : students)
+            if (student.isAlive())
+                return true;
+        return false;
     }
 
     public static Semaphore getChairs() {
