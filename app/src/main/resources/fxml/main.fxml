@@ -97,22 +97,22 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="taWorkingCount" layoutX="96.0" layoutY="264.0" text="0">
+            <Label fx:id="taWorkingCount" layoutX="75.0" layoutY="264.0" prefHeight="25.0" prefWidth="32.0" style="-fx-alignment: center;" text="0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="taSleepingCount" layoutX="336.0" layoutY="264.0" text="0">
+            <Label fx:id="taSleepingCount" layoutX="320.0" layoutY="264.0" prefHeight="25.0" prefWidth="42.0" style="-fx-alignment: center;" text="0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="studentsWaitingCount" layoutX="597.0" layoutY="264.0" prefHeight="25.0" prefWidth="6.0" text="0">
+            <Label fx:id="studentsWaitingCount" layoutX="574.0" layoutY="264.0" prefHeight="25.0" prefWidth="42.0" style="-fx-alignment: center;" text="0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="studentsComingLaterCount" layoutX="863.0" layoutY="264.0" text="0">
+            <Label fx:id="studentsComingLaterCount" layoutX="842.0" layoutY="264.0" prefHeight="25.0" prefWidth="32.0" style="-fx-alignment: center;" text="0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
