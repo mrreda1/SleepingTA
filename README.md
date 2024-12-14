@@ -1,6 +1,4 @@
-# Sleeping Teaching Assistant Project Documentation
-
-***
+# Sleeping Teaching Assistant
 
 ## Table of Contents
 
@@ -15,8 +13,6 @@
 - [Snapshots](#snapshots)
 - [How to Run](#how-to-run)
 
-***
-
 ## Project Description
 
 The Sleeping Teaching Assistant (TA) problem simulates the coordination of activities between students and teaching assistants during office hours in a university's computer science department.
@@ -26,8 +22,6 @@ The solution models the following:
 - Students: Represented as threads attempting to seek help from a TA.
 - TAs: Represented using semaphores who either assist students or sleep when no students are waiting.
 - Waiting Chairs: Represented using semaphores, allowing students to queue when a TA is busy. If no chairs are available, students leave and try again later (sleep).
-
-***
 
 ## Problem Specifications
 
@@ -52,8 +46,6 @@ Students who need help follow this process:
 - Number of students waiting on chairs.
 - Number of students who left to return later.
 
-***
-
 ## Tools and Technologies
 
 - **Java Threads** for concurrency.
@@ -61,8 +53,6 @@ Students who need help follow this process:
 - **JavaFX** for GUI.
 - **Scene Builder** for designing the GUI.
 - **Excalidraw** for designing the UI.
-
-***
 
 ## Team Members & Roles
 
@@ -72,8 +62,6 @@ Students who need help follow this process:
 - Mahmoud Talaat: Core Logic Development.
 - Mostafa Abdo: GUI Development.
 - Mostafa Mokhtar: Documentation.
-
-***
 
 ## Project Structure
 
@@ -113,13 +101,9 @@ The controller class for the GUI, responsible for handling the GUI's logic.
 
 The controller classes for the different complex components of the GUI.
 
-***
-
 ## UI Design
 
 ![ui-design](docs/ui-design.png)
-
-***
 
 ## Snapshots
 
@@ -138,8 +122,6 @@ The controller classes for the different complex components of the GUI.
 ##### Final State
 
 ![Final State](docs/final-state.png)
-
-***
 
 ## How to Run
 
