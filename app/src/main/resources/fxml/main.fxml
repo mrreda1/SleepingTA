@@ -168,7 +168,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
                <tooltip>
-                  <Tooltip fx:id="gardenTooltip" style="-fx-background-color: #f0f0f0; -fx-text-fill: #333;" text="Garden Indicates students that will come back later.">
+                  <Tooltip fx:id="gardenTooltip" style="-fx-background-color: #f0f0f0; -fx-text-fill: #333;" text="Garden indicates students that will come back later.">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -183,7 +183,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
                <tooltip>
-                  <Tooltip fx:id="hallwayTooltip" style="-fx-background-color: #f0f0f0; -fx-text-fill: #333;" text="Green Indicate Free Chair, Red Indicate Taker Chair">
+                  <Tooltip fx:id="hallwayTooltip" style="-fx-background-color: #f0f0f0; -fx-text-fill: #333;" text="Green indicates a free Chair, Red indicates a taken Chair">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -201,7 +201,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
                <tooltip>
-                  <Tooltip fx:id="taRoomTooltip" style="-fx-background-color: #f0f0f0; -fx-text-fill: #333;" text="Green indicate a Sleeping TA, Red indicate a working TA.">
+                  <Tooltip fx:id="taRoomTooltip" style="-fx-background-color: #f0f0f0; -fx-text-fill: #333;" text="Green indicates a sleeping TA, Red indicates a working TA.">
                      <font>
                         <Font size="14.0" />
                      </font>
